@@ -10,14 +10,20 @@ const NewsRoute = require("./routes/postnews");
 const categoryRoute = require("./routes/categories");
 const multer = require("multer");
 const path = require("path");
-const cors = require('cors');
+const cors = require("cors");
 const moment = require("moment");
 const Twig = require("twig"),
   twig = Twig.twig;
-  let lastUpdated = 0;
+let lastUpdated = 0;
 let start = moment(lastUpdated, "HH:mm");
 
-app.use(cors());
+const corsOptions = {
+  origin: "http://admin.harkhabr.com",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
+// app.use(cors());
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "twig");
@@ -31,12 +37,15 @@ app.use(express.json());
 app.use("/images", express.static(path.join(__dirname, "/images")));
 
 mongoose
-  .connect("mongodb+srv://admin:admin123@ecommerce.72jni.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify:true
-  })
+  .connect(
+    "mongodb+srv://admin:admin123@ecommerce.72jni.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: true,
+    }
+  )
   .then(console.log("Connected to MongoDB"))
   .catch((err) => console.log(err));
 
@@ -50,7 +59,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-app.post("/api/upload", upload.single('file'), (req, res) => {
+app.post("/api/upload", upload.single("file"), (req, res) => {
   console.log(req.file);
   res.status(200).json("File has been uploaded");
 });
