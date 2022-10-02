@@ -17,13 +17,13 @@ const Twig = require("twig"),
 let lastUpdated = 0;
 let start = moment(lastUpdated, "HH:mm");
 
-const corsOptions = {
-  origin: "http://localhost:3000/",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-};
-app.use(cors(corsOptions));
-// app.use(cors());
+// const corsOptions = {
+//   origin: "http://localhost:3000/",
+//   credentials: true, //access-control-allow-credentials:true
+//   optionSuccessStatus: 200,
+// };
+// app.use(cors(corsOptions));
+app.use(cors());
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "twig");
