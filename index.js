@@ -18,7 +18,7 @@ let lastUpdated = 0;
 let start = moment(lastUpdated, "HH:mm");
 
 const corsOptions = {
-  origin: "http://admin.harkhabr.com",
+  origin: "http://localhost:3000/",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
