@@ -23,7 +23,25 @@ let start = moment(lastUpdated, "HH:mm");
 //   optionSuccessStatus: 200,
 // };
 // app.use(cors(corsOptions));
-app.use(cors());
+// app.use(cors());
+const cors = require("cors");
+
+// enable cors
+app.use(
+  cors({
+    origin: true,
+    optionsSuccessStatus: 200,
+    credentials: true,
+  })
+);
+app.options(
+  "*",
+  cors({
+    origin: true,
+    optionsSuccessStatus: 200,
+    credentials: true,
+  })
+);
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "twig");
