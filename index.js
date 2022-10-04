@@ -17,31 +17,31 @@ const Twig = require("twig"),
 let lastUpdated = 0;
 let start = moment(lastUpdated, "HH:mm");
 
-// const corsOptions = {
-//   origin: "http://localhost:3000/",
-//   credentials: true, //access-control-allow-credentials:true
-//   optionSuccessStatus: 200,
-// };
-// app.use(cors(corsOptions));
-// app.use(cors());
-const cors = require("cors");
+const corsOptions = {
+  origin: "http://localhost:3000/",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
+app.use(cors());
+// const cors = require("cors");
 
-// enable cors
-app.use(
-  cors({
-    origin: true,
-    optionsSuccessStatus: 200,
-    credentials: true,
-  })
-);
-app.options(
-  "*",
-  cors({
-    origin: true,
-    optionsSuccessStatus: 200,
-    credentials: true,
-  })
-);
+// // enable cors
+// app.use(
+//   cors({
+//     origin: true,
+//     optionsSuccessStatus: 200,
+//     credentials: true,
+//   })
+// );
+// app.options(
+//   "*",
+//   cors({
+//     origin: true,
+//     optionsSuccessStatus: 200,
+//     credentials: true,
+//   })
+// );
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "twig");
