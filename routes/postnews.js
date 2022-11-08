@@ -1,11 +1,11 @@
 const router = require("express").Router();
 const User = require("../models/User");
-const Post = require("../models/News");
+const NewsStorySave = require("./models/News");
 
 //CREATE POST
 router.post("/", async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  const newPost = new Post(req.body);
+  const newPost = new NewsStorySave(req.body);
   try {
     const savedPost = await newPost.save();
     res.status(200).json(savedPost);
@@ -18,10 +18,10 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await NewsStorySave.findById(req.params.id);
 
     try {
-      const updatedPost = await Post.findByIdAndUpdate(
+      const updatedPost = await NewsStorySave.findByIdAndUpdate(
         req.params.id,
         {
           $set: req.body,
@@ -41,7 +41,7 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await NewsStorySave.findById(req.params.id);
 
     try {
       await post.delete();
@@ -58,7 +58,7 @@ router.delete("/:id", async (req, res) => {
 router.get("/:id", async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await NewsStorySave.findById(req.params.id);
     res.status(200).json(post);
   } catch (err) {
     res.status(500).json(err);
@@ -72,7 +72,7 @@ router.get("/", async (req, res) => {
   try {
     let posts;
 
-    posts = await Post.find();
+    posts = await NewsStorySave.find();
 
     res.status(200).json(posts);
   } catch (err) {
